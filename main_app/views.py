@@ -1,4 +1,3 @@
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -71,8 +70,12 @@ class LoginView(APIView):
         serializer.is_valid(raise_exception=True)
 
         user = serializer.validated_data['user']
-        token,_ = Token.objects.get_or_create(user=user)
+        token, _ = Token.objects.get_or_create(user=user)
+        user_data = UserSerializer(user).data
 
-        return Response({'token': token.key}, status=status.HTTP_200_OK)
+        return Response({
+            'token': token.key,
+            'user': user_data
+        }, status=status.HTTP_200_OK)
 
 
