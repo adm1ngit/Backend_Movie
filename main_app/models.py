@@ -7,7 +7,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
+#test
 class Actor(models.Model):
     name = models.CharField(max_length=255, unique=True)
     photo = models.FileField(upload_to='actors/')
